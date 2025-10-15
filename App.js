@@ -5,44 +5,28 @@ import {
   View,
   TextInput,
   Button,
+  FlatList,
 } from "react-native";
 import { useState } from "react";
+import ReadingInput from "./components/readingInput/ReadingInput";
+import ReadingList from "./components/readingList/ReadingList";
 export default function App() {
-  const [text, setText] = useState("");
   const [readings, setReadings] = useState([]);
-  const handleReadingInput = (enteredText) => {
-    setText(enteredText);
-  };
-  const handleAddReading = () => {
-    setReadings((prevReadings) => [...prevReadings, text]);
+
+  const handleAddReading = (text) => {
+    setReadings((prevReadings) => [
+      ...prevReadings,
+      { id: Math.random().toString(), text },
+    ]);
   };
 
-  const mappedReadings = readings.map((reading) => {
-    return (
-      <Text style={styles.readingItem} key={reading}>
-        {" "}
-        {reading}
-      </Text>
-    );
-  });
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Ingrese el nombre del libro "
-          onChangeText={handleReadingInput}
-        />
-        <View style={styles.buttonInput}>
-          <Button title="Agregar lectura" onPress={handleAddReading} />
-        </View>
-      </View>
+      <ReadingInput onAddReading={handleAddReading} />
       <View>
-        <Text>Lista de lecturas...</Text>
+        <Text style={styles.title}>Lista de lecturas...</Text>
       </View>
-      <View>
-        <ScrollView>{mappedReadings}</ScrollView>
-      </View>
+      <ReadingList readings={readings} />
     </View>
   );
 }
@@ -51,26 +35,9 @@ const styles = StyleSheet.create({
   appContainer: {
     padding: 50,
   },
-  inputContainer: {
-    justifyContent: "center",
-  },
-  textInput: {
-    width: "100%",
-    marginRight: 8,
-    marginVertical: 15,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: "#CCCCCC",
-  },
-  buttonInput: {
-    width: "50%",
-    alignSelf: "flex-end",
-  },
-  readingItem: {
-    margin: 12,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "green",
-    color: "white",
+  title: {
+    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
