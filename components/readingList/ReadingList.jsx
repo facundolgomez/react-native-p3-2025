@@ -5,7 +5,7 @@ const ReadingList = ({ readings }) => {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={readings}
         renderItem={renderReadingItem}

@@ -12,7 +12,7 @@ const ReadingInput = ({ onAddReading }) => {
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        style={styles.inputContainer}
+        style={styles.textInput}
         placeholder="ingrese el nombre del libro"
         onChangeText={setText}
         value={text}

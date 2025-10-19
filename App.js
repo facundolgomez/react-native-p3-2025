@@ -34,6 +34,7 @@ export default function App() {
 const styles = StyleSheet.create({
   appContainer: {
     padding: 50,
+    flex: 1,
   },
   title: {
     marginVertical: 10,
